@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <Service id="json" class-name="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider" />
+
+    <Resource id="myDatabase" type="DataSource">
+        JdbcDriver  com.mysql.jdbc.Driver
+        JdbcUrl jdbc:mysql://localhost:3306/contacts
+        UserName root
+        Password bruno
+        validationQuery = SELECT 1
+        JtaManaged          true
+        DefaultAutoCommit   false
+    </Resource>
+
+</resources>
