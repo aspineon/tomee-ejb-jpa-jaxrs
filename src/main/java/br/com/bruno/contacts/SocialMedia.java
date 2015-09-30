@@ -21,7 +21,7 @@ public class SocialMedia {
 	private String url;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "contact_id", nullable = false)
+	@JoinColumn(name = "contact_id", nullable = true)
 	@JsonIgnore
 	private Contact contact;
 

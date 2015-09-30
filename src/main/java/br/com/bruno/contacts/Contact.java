@@ -2,6 +2,7 @@ package br.com.bruno.contacts;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -18,7 +19,7 @@ public class Contact {
 
 	private String email;
 
-	@OneToMany(mappedBy = "contact")
+	@OneToMany(mappedBy = "contact", cascade = CascadeType.ALL)
 	private List<SocialMedia> medias;
 
 	public long getId() {

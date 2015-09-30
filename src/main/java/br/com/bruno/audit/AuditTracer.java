@@ -19,7 +19,8 @@ public class AuditTracer {
 			System.out.println("getParameters=" + jsonConverter.toJson(context.getParameters()));
 			System.out.println("getTarget=" + jsonConverter.toJson(context.getTarget()));
 			System.out.println("getContextData=" + jsonConverter.toJson(context.getContextData()));
-
+			System.out.println("------------- calling method...");
+			
 			Object result = context.proceed();
 
 			// System.out.println("result=" + result);
