@@ -67,9 +67,8 @@ public class ContactsRest {
     @Consumes({MediaType.APPLICATION_JSON})
     public Response update(@PathParam("id") Long id, Contact contact) {
     	contact.setId(id);
-    	Contact c = contactRepository.update(contact);
-        URI uri = uriInfo.getAbsolutePathBuilder().path(String.valueOf(c.getId())).build();
-        return Response.ok(uri).build();
+    	contactRepository.update(contact);
+        return Response.ok().build();
     }
 
     @DELETE

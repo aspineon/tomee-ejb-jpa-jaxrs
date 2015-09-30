@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
-    <Service id="json" class-name="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider" />
+<!--     <Service id="json" class-name="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider" /> -->
 
     <Resource id="myDatabase" type="DataSource">
         JdbcDriver  com.mysql.jdbc.Driver
