@@ -19,7 +19,11 @@ public class AuditTracer {
 		System.out.println("getTarget=" + jsonConverter.toJson(context.getTarget()));
 		System.out.println("getContextData=" + jsonConverter.toJson(context.getContextData()));
 		
-		return context.proceed();
+		Object result = context.proceed();
+		
+		//System.out.println("result=" + result);
+		
+		return result;
 	}
 
 }
