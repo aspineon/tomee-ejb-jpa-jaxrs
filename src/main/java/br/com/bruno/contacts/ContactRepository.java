@@ -6,7 +6,10 @@ import javax.ejb.Stateless;
 import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.JoinType;
+import javax.persistence.criteria.Root;
 
 import br.com.bruno.audit.AuditTracer;
 
@@ -19,13 +22,22 @@ public class ContactRepository {
 	
 	public Contact add(Contact contact) {
 		em.persist(contact);
+		for (SocialMedia sm : contact.getMedias()) {
+			sm.setContact(contact);
+			em.persist(sm);
+		}
 		
 		return contact;
 	}
 	
 	public List<Contact> findAll() {
-		Query query = em.createQuery("SELECT c FROM Contact c");
-		return (List<Contact>) query.getResultList();
+		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+	    CriteriaQuery<Contact> query = criteriaBuilder.createQuery(Contact.class);
+	    Root<Contact> contact = query.from(Contact.class);
+	    contact.fetch("medias", JoinType.LEFT);
+	    query.select(contact);
+	    query.distinct(true);
+		return em.createQuery(query).getResultList();
 	}
 	
 	public Contact findById(long id) {
@@ -33,11 +45,10 @@ public class ContactRepository {
 	}
 
 	public Contact update(Contact contact) {
-//		return em.merge(contact);
+		return em.merge(contact);
 		
-		System.out.println("should call em.merge here");
-		
-		return contact;
+//		System.out.println("should call em.merge here");
+//		return contact;
 	}
 
 	public void remove(Long id) {

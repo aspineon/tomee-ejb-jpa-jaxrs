@@ -10,20 +10,25 @@ public class AuditTracer {
 
 	@Inject
 	private JsonConverter jsonConverter;
-	
+
 	@AroundInvoke
 	public Object audit(InvocationContext context) throws Exception {
-		
-		System.out.println("------------- audit; getMethod=" + context.getMethod());
-		System.out.println("getParameters=" + jsonConverter.toJson(context.getParameters()));
-		System.out.println("getTarget=" + jsonConverter.toJson(context.getTarget()));
-		System.out.println("getContextData=" + jsonConverter.toJson(context.getContextData()));
-		
-		Object result = context.proceed();
-		
-		//System.out.println("result=" + result);
-		
-		return result;
+
+		try {
+			System.out.println("------------- audit; getMethod=" + context.getMethod());
+			System.out.println("getParameters=" + jsonConverter.toJson(context.getParameters()));
+			System.out.println("getTarget=" + jsonConverter.toJson(context.getTarget()));
+			System.out.println("getContextData=" + jsonConverter.toJson(context.getContextData()));
+
+			Object result = context.proceed();
+
+			// System.out.println("result=" + result);
+
+			return result;
+			
+		} finally {
+			System.out.println("------------- audit; fim!");
+		}
 	}
 
 }

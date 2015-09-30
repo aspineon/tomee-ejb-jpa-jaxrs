@@ -7,6 +7,8 @@
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<jta-data-source>java:openejb/Resource/myDatabase</jta-data-source>
 		<class>br.com.bruno.contacts.Contact</class>
+		<class>br.com.bruno.contacts.SocialMedia</class>
+		
 
 		<properties>
 			<property name="hibernate.show_sql" value="true" />

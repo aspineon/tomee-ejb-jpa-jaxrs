@@ -1,8 +1,11 @@
 package br.com.bruno.contacts;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Contact {
@@ -14,6 +17,9 @@ public class Contact {
 	private String name;
 
 	private String email;
+
+	@OneToMany(mappedBy = "contact")
+	private List<SocialMedia> medias;
 
 	public long getId() {
 		return id;
@@ -39,6 +45,14 @@ public class Contact {
 		this.email = email;
 	}
 
+	public List<SocialMedia> getMedias() {
+		return medias;
+	}
+
+	public void setMedias(List<SocialMedia> medias) {
+		this.medias = medias;
+	}
+
 	@Override
 	public String toString() {
 		return "Contact [id=" + id + ", name=" + name + ", email=" + email + "]";
@@ -49,6 +63,7 @@ public class Contact {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((medias == null) ? 0 : medias.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
@@ -67,6 +82,11 @@ public class Contact {
 				return false;
 		} else if (!email.equals(other.email))
 			return false;
+		if (medias == null) {
+			if (other.medias != null)
+				return false;
+		} else if (!medias.equals(other.medias))
+			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;
@@ -74,4 +94,5 @@ public class Contact {
 			return false;
 		return true;
 	}
+
 }

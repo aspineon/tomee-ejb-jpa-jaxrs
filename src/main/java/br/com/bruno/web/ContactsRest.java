@@ -36,7 +36,7 @@ public class ContactsRest {
     	
     	List<Contact> contacts = contactRepository.findAll();
     	
-    	System.out.println("contacts = " + contacts);
+//    	System.out.println("contacts = " + contacts);
     	
     	return contacts;
     }
