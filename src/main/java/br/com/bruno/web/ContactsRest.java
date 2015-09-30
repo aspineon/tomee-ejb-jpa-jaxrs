@@ -63,8 +63,10 @@ public class ContactsRest {
     }
 
     @PUT
+    @Path("/{id}")
     @Consumes({MediaType.APPLICATION_JSON})
-    public Response update(Contact contact) {
+    public Response update(@PathParam("id") Long id, Contact contact) {
+    	contact.setId(id);
     	Contact c = contactRepository.update(contact);
         URI uri = uriInfo.getAbsolutePathBuilder().path(String.valueOf(c.getId())).build();
         return Response.ok(uri).build();
@@ -72,8 +74,8 @@ public class ContactsRest {
 
     @DELETE
     @Path("/{id}")
-    public Response remove(@PathParam("id") Long itemId) {
-    	contactRepository.remove(itemId);
+    public Response remove(@PathParam("id") Long id) {
+    	contactRepository.remove(id);
         return Response.noContent().build();
     }
 	

@@ -1,3 +1,4 @@
+package br.com.bruno.config;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 

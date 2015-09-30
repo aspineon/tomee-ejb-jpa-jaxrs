@@ -3,11 +3,15 @@ package br.com.bruno.contacts;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import br.com.bruno.audit.AuditTracer;
+
 @Stateless
+@Interceptors(AuditTracer.class)
 public class ContactRepository {
 	
 	@PersistenceContext
@@ -29,7 +33,11 @@ public class ContactRepository {
 	}
 
 	public Contact update(Contact contact) {
-		return em.merge(contact);
+//		return em.merge(contact);
+		
+		System.out.println("should call em.merge here");
+		
+		return contact;
 	}
 
 	public void remove(Long id) {
