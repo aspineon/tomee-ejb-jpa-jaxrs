@@ -21,11 +21,16 @@ public class ContactRepository {
 	private EntityManager em;
 	
 	public Contact add(Contact contact) {
-		em.persist(contact);
 		for (SocialMedia sm : contact.getMedias()) {
 			sm.setContact(contact);
-			em.persist(sm);
 		}
+		
+		em.merge(contact);
+		em.flush();
+//		for (SocialMedia sm : contact.getMedias()) {
+//			sm.setContact(contact);
+//			em.persist(sm);
+//		}
 		
 		return contact;
 	}

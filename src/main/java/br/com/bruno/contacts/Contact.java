@@ -1,6 +1,7 @@
 package br.com.bruno.contacts;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -19,8 +20,8 @@ public class Contact {
 
 	private String email;
 
-	@OneToMany(mappedBy = "contact", cascade = CascadeType.ALL)
-	private List<SocialMedia> medias;
+	@OneToMany(mappedBy = "contact", cascade = CascadeType.ALL, orphanRemoval = true)
+	private Set<SocialMedia> medias = new HashSet<SocialMedia>();
 
 	public long getId() {
 		return id;
@@ -46,11 +47,11 @@ public class Contact {
 		this.email = email;
 	}
 
-	public List<SocialMedia> getMedias() {
+	public Set<SocialMedia> getMedias() {
 		return medias;
 	}
 
-	public void setMedias(List<SocialMedia> medias) {
+	public void setMedias(Set<SocialMedia> medias) {
 		this.medias = medias;
 	}
 
